@@ -29,7 +29,7 @@ const UserForm = ({ onSubmit, isCreating }) => {
 
     onSubmit(newUser);
 
-    // Limpiar inputs después de enviar
+    // Limpia los inputs después de enviar
     setName('');
     setJob('');
   };
@@ -41,7 +41,7 @@ const UserForm = ({ onSubmit, isCreating }) => {
       {formError ? (
         <Text style={styles.errorText}>{formError}</Text>
       ) : null}
-
+      {/* Campos de texto para nombre y job, y boton para enviar */}
       <TextInput
         style={styles.input}
         placeholder="Nombre"

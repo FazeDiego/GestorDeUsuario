@@ -16,7 +16,7 @@ const UserList = ({ users }) => {
           source={{ uri: item.avatar }} 
           style={styles.avatar}
         />
-      )}
+      )} //muestra la imagen solo si existe, muestra nombre y el email siempre
       <View style={styles.userInfo}>
         <Text style={styles.userName}>
           {item.first_name} {item.last_name}
@@ -30,7 +30,7 @@ const UserList = ({ users }) => {
 
   return (
     <FlatList
-      data={users}
+      data={users} //se recibe el array actualizado con el nuevo usuario
       keyExtractor={(item) => item.id?.toString() ?? Math.random().toString()}
       renderItem={renderUser}
       contentContainerStyle={

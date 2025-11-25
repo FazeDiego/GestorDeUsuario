@@ -1,6 +1,7 @@
 // src/features/users/usersSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+//Redux -> estado global para gestionar usuarios, items, status, error, paginacion, creacion de usuario
 const initialState = {
   items: [],
   status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
@@ -12,7 +13,7 @@ const initialState = {
   userCreatedSuccessfully: false,
 };
 
-//----------------------------------Thunk para GET, que trae usuarios----------------------------------
+//----------------------------------Thunk para GET, que trae usuarios de la API----------------------------------
 export const fetchUsers = createAsyncThunk(
   'users/fetchUsers',
   async (page = 1) => {
@@ -44,14 +45,14 @@ export const createUser = createAsyncThunk(
           'Content-Type': 'application/json',
           'x-api-key': 'reqres-free-v1'
         },
-        body: JSON.stringify(newUser),
+        body: JSON.stringify(newUser), // este new usuario tendra name y job
       }
     );
     if (!response.ok) {
       throw new Error('Error al crear el usuario');
     }
     const data = await response.json();
-    return data; // Retorna el objeto usuario creado
+    return data; // Retorna respuesta de la API con nombre, job.
   }
 );
 
@@ -95,9 +96,9 @@ const usersSlice = createSlice({
       .addCase(createUser.fulfilled, (state, action) => {
         state.isCreating = false;
         state.userCreatedSuccessfully = true;
-        // Agregar el usuario creado al listado local
-        // La API de reqres.in retorna un objeto con id, name, job, createdAt
-        // Agregamos first_name y last_name basados en name para mantener consistencia
+        // Agregar el usuario creado al estado global 
+        // La API de "reqres.in" nos retorna un objeto con id, name, job, createdAt
+        // Agregamos un nombre y apellido basados en name para mantener consistencia
         const createdUser = {
           id: action.payload.id,
           first_name: action.payload.name.split(' ')[0] || action.payload.name,
@@ -105,7 +106,7 @@ const usersSlice = createSlice({
           email: `${action.payload.name.toLowerCase().replace(/\s+/g, '')}@reqres.in`,
           avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(action.payload.name)}`,
         };
-        state.items = [createdUser, ...state.items];
+        state.items = [createdUser, ...state.items]; // se agrega al inicio del array de usuarios
       })
       .addCase(createUser.rejected, (state, action) => {
         state.isCreating = false;

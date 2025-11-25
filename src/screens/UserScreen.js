@@ -23,7 +23,7 @@ const UserScreen = () => {
   // Traer usuarios cuando la app arranca
   useEffect(() => {
     if (status === 'idle') {
-      dispatch(fetchUsers(1)); // Página 1 por defecto
+      dispatch(fetchUsers(1)); // Se carga la pagina 1 por defecto
     }
   }, [status, dispatch]);
 
@@ -34,13 +34,13 @@ const UserScreen = () => {
       dispatch(clearUserCreatedFlag());
     }
   }, [userCreatedSuccessfully, dispatch]);
-
+// para crear un nuevo usuario
   const handleCreateUser = (newUser) => {
     dispatch(createUser(newUser));
   };
-
+// para el cambio de pagina
   const handlePageChange = (page) => {
-    dispatch(fetchUsers(page));
+    dispatch(fetchUsers(page)); 
   };
 
   const isLoadingList = status === 'loading';
@@ -52,21 +52,21 @@ const UserScreen = () => {
       {/* FORMULARIO DE CREACIÓN */}
       <UserForm onSubmit={handleCreateUser} isCreating={isCreating} />
 
-      {/* Error al crear usuario */}
+      {/* mostar error si no se pudo crear el usuario */}
       {createError && (
         <View style={styles.errorContainer}>
           <Text style={styles.errorText}>Error al crear usuario: {createError}</Text>
         </View>
       )}
 
-      {/* ESTADOS DE LISTADO */}
+      {/* Tipos de estado -> carga */}
       {isLoadingList && (
         <View style={styles.stateContainer}>
           <ActivityIndicator size="small" color="#007AFF" />
           <Text style={styles.stateText}>Cargando usuarios...</Text>
         </View>
       )}
-
+        {/* Tipos de estado -> error */}
       {status === 'failed' && (
         <View style={styles.stateContainer}>
           <Text style={[styles.stateText, styles.errorText]}>
@@ -76,12 +76,12 @@ const UserScreen = () => {
         </View>
       )}
 
-      {/* LISTA DE USUARIOS */}
+      {/* Lista de usuarios */}
       {!isLoadingList && status === 'succeeded' && (
         <UserList users={items} />
       )}
 
-      {/* PAGINACIÓN */}
+      {/* Paginacion simple */}
       {status === 'succeeded' && totalPages > 1 && (
         <View style={styles.paginationContainer}>
           <Button
