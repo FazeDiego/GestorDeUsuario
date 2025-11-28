@@ -4,16 +4,16 @@ Aplicación React Native desarrollada con Expo que permite gestionar usuarios de
 
 ## Características Principales
 
-- ✅ Lista de usuarios con información detallada (nombre, email, avatar)
-- ✅ Creación de nuevos usuarios mediante formulario modal
-- ✅ Botón flotante (FAB) para crear usuarios - posicionado ergonómicamente
-- ✅ Selección de foto de perfil desde galería del dispositivo
-- ✅ Generación automática de avatares con iniciales (estilo Microsoft Teams)
-- ✅ Toasts discretos para notificaciones (Android)
-- ✅ Paginación para navegar entre páginas de usuarios
-- ✅ Manejo de estado global con Redux Toolkit
-- ✅ Estados de carga y manejo de errores
-- ✅ Componentes reutilizables (UserList, UserForm)
+-  Lista de usuarios con información detallada (nombre, email, avatar)
+-  Creación de nuevos usuarios mediante formulario modal
+-  Botón flotante (FAB) para crear usuarios - posicionado ergonómicamente
+-  Selección de foto de perfil desde galería del dispositivo
+-  Generación automática de avatares con iniciales (estilo Microsoft Teams)
+-  Toasts discretos para notificaciones (Android)
+-  Paginación para navegar entre páginas de usuarios
+-  Manejo de estado global con Redux Toolkit
+-  Estados de carga y manejo de errores
+-  Componentes reutilizables (UserList, UserForm)
 
 ## Tecnologías Utilizadas
 
@@ -299,3 +299,4 @@ Diego - Trabajo Práctico de React Native
 ## Licencia
 
 Este proyecto es de uso académico.
+
