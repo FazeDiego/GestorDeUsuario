@@ -1,0 +1,93 @@
+# Dependencias
+node_modules/
+package-lock.json
+yarn.lock
+
+# Expo
+.expo/
+.expo-shared/
+dist/
+web-build/
+
+# Logs
+npm-debug.*
+yarn-debug.log*
+yarn-error.log*
+*.log
+logs/
+
+# Certificados y claves
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.keystore
+*.orig.*
+
+# Variables de entorno
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build files - Android
+*.apk
+*.aab
+android/app/build/
+android/.gradle/
+android/local.properties
+android/.idea/
+android/captures/
+
+# Build files - iOS
+ios/Pods/
+ios/build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace
+
+# Metro
+.metro-health-check*
+
+# Testing
+coverage/
+.nyc_output
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Sistemas operativos
+.DS_Store
+Thumbs.db
+.AppleDouble
+.LSOverride
+
+# Archivos temporales
+*.tmp
+*.temp
+.cache/
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
