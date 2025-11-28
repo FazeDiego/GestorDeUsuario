@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "MiniBlog de Clases",
-    "slug": "miniblog-clases",
+    "name": "Gestor de Usuarios de Prueba",
+    "slug": "gestor-de-usuarios-de-prueba",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
@@ -9,7 +9,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.miniblog.clases"
+      "package": "com.gestor.de.usuarios.de.prueba"
     }
   }
 }

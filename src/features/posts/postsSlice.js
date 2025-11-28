@@ -47,7 +47,6 @@ const postsSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    // Si quisieras agregar acciones síncronas locales, van acá.
   },
   extraReducers: (builder) => {
     builder

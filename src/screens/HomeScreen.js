@@ -48,7 +48,7 @@ const HomeScreen = () => {
 
     dispatch(addPost(newPost));
 
-    // limpiar inputs (la API es fake, pero el estado global se actualiza)
+    // limpiar inputs después de enviar
     setTitle('');
     setBody('');
   };
@@ -66,7 +66,7 @@ const HomeScreen = () => {
 //--Encabezado de la app 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>MiniBlog de Clases</Text>
+      <Text style={styles.header}>Gestor de Usuarios de Prueba</Text>
 
       {/* ESTADOS DE LISTADO */}
       {isLoadingList && (

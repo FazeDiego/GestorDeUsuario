@@ -11,12 +11,14 @@ import {
 const UserList = ({ users }) => {
   const renderUser = ({ item }) => (
     <View style={styles.card}>
+      {/*//muestra la imagen solo si existe, muestra nombre y el email siempre*/}
       {item.avatar && (
         <Image 
           source={{ uri: item.avatar }} 
           style={styles.avatar}
         />
-      )} //muestra la imagen solo si existe, muestra nombre y el email siempre
+      )}
+
       <View style={styles.userInfo}>
         <Text style={styles.userName}>
           {item.first_name} {item.last_name}

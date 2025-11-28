@@ -45,14 +45,15 @@ export const createUser = createAsyncThunk(
           'Content-Type': 'application/json',
           'x-api-key': 'reqres-free-v1'
         },
-        body: JSON.stringify(newUser), // este new usuario tendra name y job
+        body: JSON.stringify({ name: newUser.name, job: newUser.job }), // Solo enviar name y job a la API
       }
     );
     if (!response.ok) {
       throw new Error('Error al crear el usuario');
     }
     const data = await response.json();
-    return data; // Retorna respuesta de la API con nombre, job.
+    // Agregar el customAvatar al resultado para usarlo en el reducer
+    return { ...data, customAvatar: newUser.customAvatar };
   }
 );
 
@@ -60,7 +61,6 @@ const usersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
-    // Acciones síncronas si se necesitan
     clearCreateError: (state) => {
       state.createError = null;
     },
@@ -99,12 +99,37 @@ const usersSlice = createSlice({
         // Agregar el usuario creado al estado global 
         // La API de "reqres.in" nos retorna un objeto con id, name, job, createdAt
         // Agregamos un nombre y apellido basados en name para mantener consistencia
+        
+        // Extraer nombre y apellido del nombre completo
+        const nameParts = action.payload.name.trim().split(/\s+/); // divide por espacios
+        const firstName = nameParts[0] || '';
+        const lastName = nameParts.slice(1).join(' ') || '';
+        
+        // Generar iniciales: primera letra del nombre + primera letra del apellido (si existe)
+        // Si solo hay nombre, será una sola inicial (ej: "Julian" → "J")
+        // Si hay nombre y apellido, serán dos iniciales (ej: "Diego Martinez" → "DM")
+        let initials = '';
+        if (firstName) {
+          initials = firstName.charAt(0).toUpperCase();
+          if (lastName) {
+            initials += lastName.charAt(0).toUpperCase();
+          }
+        }
+        
+        // Generar email con formato nombre.apellido@reqres.in
+        let emailPrefix = firstName.toLowerCase();
+        if (lastName) {
+          emailPrefix += '.' + lastName.toLowerCase().replace(/\s+/g, '.');
+        }
+        
         const createdUser = {
           id: action.payload.id,
-          first_name: action.payload.name.split(' ')[0] || action.payload.name,
-          last_name: action.payload.name.split(' ').slice(1).join(' ') || '',
-          email: `${action.payload.name.toLowerCase().replace(/\s+/g, '')}@reqres.in`,
-          avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(action.payload.name)}`,
+          first_name: firstName,
+          last_name: lastName,
+          email: `${emailPrefix}@reqres.in`,
+          // Si hay foto personalizada, usar esa; sino generar avatar con iniciales
+          avatar: action.payload.customAvatar || 
+                  `https://ui-avatars.com/api/?name=${encodeURIComponent(initials)}&background=random&size=128`,
         };
         state.items = [createdUser, ...state.items]; // se agrega al inicio del array de usuarios
       })
